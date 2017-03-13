@@ -50,7 +50,7 @@ char* obus_msg_type = NULL;
 #define OBUS_OPMODE_LISTEN 2
 
 int main(int argc, char* argv[]){
-	obus_confFile = strdup("obus.conf");
+	obus_confFile = strdup("/etc/obus.conf");
 	obus_host = strdup(OBUS_DEFAULT_HOST);
 	obus_msg_type = strdup("event:");
 	
