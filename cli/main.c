@@ -149,9 +149,12 @@ int main(int argc, char* argv[]){
 				char* newMsg = malloc(newMsgLen + 2);
 
 				strncpy(newMsg, optarg, newMsgLen);
-				strncat(newMsg, ":", 1);
+				if(newMsgLen > 0){
+					strncat(newMsg, ":", 1);
+				}
 				
 				obus_msg_type = newMsg;
+				break;
 			}
 			case 'c': {
                 free(obus_confFile);
