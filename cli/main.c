@@ -243,13 +243,13 @@ int main(int argc, char* argv[]){
 		size_t len = 0;
 		ssize_t read;
 
-		while((read = getline(&line, &len, stdin)) != -1){
-			if(bufSize > typeLen){
-				strncat(buffer, "\n", 1);
-			}
-			
+		while((read = getline(&line, &len, stdin)) != -1){			
 			if(runningInteractive && read == 1){
 				break;
+			}
+
+			if(bufSize > typeLen){
+				strncat(buffer, "\n", 1);
 			}
 
 			bufSize += (read - 1);
