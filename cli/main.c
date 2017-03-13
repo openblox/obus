@@ -272,7 +272,7 @@ int main(int argc, char* argv[]){
 			return EXIT_FAILURE;
 		}
 	}else{
-		r = zmq_setsockopt(zmq_req, ZMQ_SUBSCRIBE, obus_msg_type, 0);
+		r = zmq_setsockopt(zmq_req, ZMQ_SUBSCRIBE, obus_msg_type, strlen(obus_msg_type));
 		if(r != 0){
 			fputs("Failed to subscribe.\n", stderr);
 			return EXIT_FAILURE;
