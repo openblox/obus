@@ -27,7 +27,6 @@
 /daemon/Makefile
 /daemon/Makefile.in
 /daemon/*.o
-/daemon/*.la
-/daemon/*_la-*
+/daemon/obus_daemon
 .#*
 /common/stamp-*
