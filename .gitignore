@@ -29,3 +29,5 @@
 /daemon/*.o
 /daemon/*.la
 /daemon/*_la-*
+.#*
+/common/stamp-*
