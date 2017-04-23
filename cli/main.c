@@ -52,7 +52,7 @@ char* obus_msg_type = NULL;
 int main(int argc, char* argv[]){
 	obus_confFile = strdup("/etc/obus.conf");
 	obus_host = strdup(OBUS_DEFAULT_HOST);
-	obus_msg_type = strdup("event:");
+	obus_msg_type = NULL;
 	
 	unsigned char obus_opMode = 0;
 	
@@ -150,7 +150,8 @@ int main(int argc, char* argv[]){
 
 				strncpy(newMsg, optarg, newMsgLen);
 				if(newMsgLen > 0){
-					strncat(newMsg, ":", 1);
+				    newMsg[newMsgLen] = ':';
+					newMsg[newMsgLen + 1] = '\0';
 				}
 				
 				obus_msg_type = newMsg;
@@ -233,6 +234,11 @@ int main(int argc, char* argv[]){
 
 	if(obus_opMode == OBUS_OPMODE_SEND){
 		buffer[0] = '\0';
+
+		if(obus_msg_type == NULL){
+			obus_msg_type = strdup("event:");
+		}
+		
 		size_t typeLen = strlen(obus_msg_type);
 		size_t bufSize = typeLen;
 		strncat(buffer, obus_msg_type, typeLen);
@@ -275,6 +281,11 @@ int main(int argc, char* argv[]){
 			return EXIT_FAILURE;
 		}
 	}else{
+		if(obus_msg_type == NULL){
+			obus_msg_type = malloc(1);
+			obus_msg_type[0] = '\0';
+		}
+		
 		r = zmq_setsockopt(zmq_req, ZMQ_SUBSCRIBE, obus_msg_type, strlen(obus_msg_type));
 		if(r != 0){
 			fputs("Failed to subscribe.\n", stderr);
